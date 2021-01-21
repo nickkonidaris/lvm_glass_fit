@@ -88,7 +88,7 @@ def fit_glass(gd, meltname="", compare=None, Plot=True, model="two"):
         fn = ff(l)
         rs[ix] = n-fn
 
-        if compare is None: d = None
+        if compare is None: d = -1
         else: d = n-compare[l]
         offsets[ix] = d
         print("%10.4f %10.6f %10.6f %15.2e %15.2e" % (l, n, fn, n-fn, d))
@@ -100,7 +100,7 @@ def fit_glass(gd, meltname="", compare=None, Plot=True, model="two"):
         ll = np.arange(.35,1,.01)
         plot(ll, ff(ll) - sellmeiern(ll))
         grid(True)
-        title("Fit Function - N-BAK2 function: %s" % (ff.parameters))
+        title("Fit Function - Catalog function: %s" % (ff.parameters))
         xlabel("Wavelength [micron]")
         
         subplot(312)
@@ -138,11 +138,16 @@ B1236215A = {d: 1.539893, e: 1.542050, r: 1.535573, Fp: 1.546708, Cp: 1.537578,
         g: 1.551114, h: 1.555203, s: 1.532260, t: 1.529722, i: 1.56215}
 B1236123A = {d: 1.539818, e: 1.541977, r: 1.535499, Fp: 1.546628, Cp: 1.537505,
         g: 1.551033, h: 1.555114, s: 1.532191, t: 1.529649, i: 1.56205}
+# missing F', C'
+#B1236248A = {d: 1.539898, e: 1.542058, r: 1.535575, s: 1.532265, 
+        #t: 1.529722, g: 1.551121, h: 1.555207}
 
-ff=fit_glass(N_BAK2, meltname="Catalog", compare=N_BAK2)
-#ff=fit_glass(B1236231A, meltname="B1236231A", compare=N_BAK2)
-#ff=fit_glass(B1236215A, meltname="B1236215A", compare=N_BAK2)
-#ff=fit_glass(B1236123A, meltname="B1236123A", compare=N_BAK2)
+
+
+
+ff=fit_glass(B1236231A, meltname="B1236231A", compare=N_BAK2)
+ff=fit_glass(B1236215A, meltname="B1236215A", compare=N_BAK2)
+ff=fit_glass(B1236123A, meltname="B1236123A", compare=N_BAK2)
 
 
 pars = []
